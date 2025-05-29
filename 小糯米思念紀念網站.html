@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小糯米的思念 - 跨越距離的愛</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .floating-memories {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .memory-bubble {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.4);
+            font-size: 16px;
+            animation: float-up 8s infinite linear;
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 30px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #667eea);
+            background-size: 200% 100%;
+            animation: gradient-flow 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradient-flow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .separation-visual {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .pet-side, .owner-side {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .pet-avatar, .owner-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            animation: gentle-pulse 4s ease-in-out infinite;
+            position: relative;
+        }
+        
+        .pet-avatar {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        }
+        
+        .owner-avatar {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+        }
+        
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .connection-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, #ff9a9e, transparent, transparent, #a8edea);
+            background-size: 200% 100%;
+            animation: connection-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes connection-pulse {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .distance-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #666;
+            border: 2px solid #f093fb;
+            animation: heartbeat 3s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+        
+        h1 {
+            color: #2d3436;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            color: #636e72;
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+        
+        .separation-status {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            animation: gentle-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes gentle-glow {
+            0%, 100% { box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6); }
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tab {
+            background: transparent;
+            border: 2px solid #ddd;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            color: #2d3436;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .tab:hover::before {
+            left: 100%;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .tab:hover:not(.active) {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px);
+            margin-bottom: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .longing-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 154, 158, 0.1), rgba(254, 207, 239, 0.1));
+            border-radius: 20px;
+            border: 2px solid rgba(255, 154, 158, 0.3);
+        }
+        
+        .longing-meter {
+            width: 100%;
+            max-width: 400px;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .longing-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff9a9e, #fecfef, #f093fb);
+            border-radius: 10px;
+            animation: longing-pulse 2s ease-in-out infinite;
+            width: 95%;
+        }
+        
+        @keyframes longing-pulse {
+            0%, 100% { width: 90%; }
+            50% { width: 98%; }
+        }
+        
+        .missing-counter {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .counter-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #667eea;
+        }
+        
+        .counter-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .counter-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .counter-label {
+            color: #636e72;
+            font-size: 1.1em;
+        }
+        
+        .memory-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .memory-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid #f093fb;
+        }
+        
+        .memory-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f093fb, #667eea);
+            border-radius: 0 20px 0 60px;
+            opacity: 0.1;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-left-color: #667eea;
+        }
+        
+        .memory-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .memory-title {
+            color: #2d3436;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .memory-text {
+            color: #636e72;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .memory-emotion {
+            color: #f093fb;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-align: right;
+        }
+        
+        .wish-board {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .wish-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .wish-input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .wish-input:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: scale(1.02);
+        }
+        
+        .wish-textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .wish-btn {
+            background: linear-gradient(135deg, #f093fb, #ff9a9e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .wish-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .wish-btn:hover::before {
+            left: 100%;
+        }
+        
+        .wish-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(240, 147, 251, 0.6);
+        }
+        
+        .wish-list {
+            margin-top: 30px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .wish-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #f093fb;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .wish-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+        
+        .wish-author {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #ffeaa7;
+        }
+        
+        .wish-content {
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .wish-time {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: right;
+        }
+        
+        .reunion-dreams {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(168, 237, 234, 0.2), rgba(254, 214, 227, 0.2));
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+        }
+        
+        .dream-cloud {
+            background: white;
+            padding: 20px;
+            border-radius: 50px;
+            margin: 15px auto;
+            max-width: 600px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: float-dream 4s ease-in-out infinite;
+        }
+        
+        @keyframes float-dream {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .dream-cloud::before {
+            content: '☁️';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 1.5em;
+        }
+        
+        .virtual-hug {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .hug-button {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.3em;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 154, 158, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hug-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 154, 158, 0.6);
+        }
+        
+        .hug-button:active {
+            transform: scale(0.95);
+        }
+        
+        .hug-counter {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #636e72;
+        }
+        
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px);
+        }
+        
+        .footer-message {
+            font-size: 1.2em;
+            color: #636e72;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .footer-hearts {
+            font-size: 2em;
+            margin: 20px 0;
+            animation: rainbow-hearts 3s ease-in-out infinite;
+        }
+        
+        @keyframes rainbow-hearts {
+            0% { color: #ff9a9e; }
+            25% { color: #fecfef; }
+            50% { color: #f093fb; }
+            75% { color: #667eea; }
+            100% { color: #ff9a9e; }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            .separation-visual {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .connection-line {
+                width: 2px;
+                height: 100px;
+                transform: translate(-50%, -50%) rotate(90deg);
+            }
+            
+            .distance-indicator {
+                top: 50%;
+                transform: translate(-50%, -50%) rotate(-90deg);
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab {
+                width: 100%;
+                max-width: 250px;
+                text-align: center;
+            }
+            
+            .memory-wall,
+            .missing-counter {
+                grid-template-columns: 1fr;
+            }
+            
+            .pet-avatar, .owner-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="floating-memories" id="floating-memories"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="separation-visual">
+                <div class="pet-side">
+                    <div class="pet-avatar">🐱</div>
+                    <div style="font-weight: bold; color: #2d3436;">小糯米</div>
+                    <div style="color: #636e72; font-size: 0.9em;">想念主人中...</div>
+                </div>
+                
+                <div class="connection-line"></div>
+                <div class="distance-indicator">💔 分離中</div>
+                
+                <div class="owner-side">
+                    <div class="owner-avatar">👤</div>
+                    <div style="font-weight: bold; color: #2d3436;">親愛的主人</div>
+                    <div style="color: #636e72; font-size: 0.9em;">思念小糯米中...</div>
+                </div>
+            </div>
+            
+            <h1>小糯米的思念</h1>
+            <div class="subtitle">距離無法阻隔我們的愛</div>
+            <div class="separation-status">💝 愛在心中，永不分離</div>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="tab active" data-tab="longing">💔 思念之情</button>
+            <button class="tab" data-tab="memories">🌟 珍貴回憶</button>
+            <button class="tab" data-tab="wishes">💌 心願留言</button>
+            <button class="tab" data-tab="dreams">☁️ 重逢夢想</button>
+            <button class="tab" data-tab="connection">💕 心靈連結</button>
+        </div>
+        
+        <div id="longing" class="tab-content active">
+            <h2 style="text-align: center; color: #2d3436; margin-bottom: 30px;">💔 思念的深度</h2>
+            
+            <div class="longing-section">
+                <h3 style="color: #667eea; margin-bottom: 20px;">小糯米對主人的思念指數</h3>
+                <div class="longing-meter">
+                    <div class="longing-fill"></div>
+                </div>
+                <p style="color: #636e72; margin-top: 15px; font-style: italic;">
+                    "每一秒都在想念你，我的心裡只有你..." - 小糯米
+                </p>
+            </div>
+            
+            <div class="missing-counter">
+                <div class="counter-item">
+                    <div class="counter-number" id="days-counter">0</div>
+                    <div class="counter-label">分離的日子</div>
+                </div>
+                
+                <div class="counter-item">
+                    <div class="counter-number" id="hours-counter">0</div>
+                    <div class="counter-label">想念的小時</div>
+                </div>
+                
+                <div class="counter-item">
+                    <div class="counter-number" id="minutes-counter">0</div>
+                    <div class="counter-label">思念的分鐘</div>
+                </div>
+                
+                <div class="counter-item">
+                    <div class="counter-number" id="heartbeats-counter">0</div>
+                    <div class="counter-label">心跳次數</div>
+                </div>
+            </div>
+            
+            <div class="memory-wall">
+                <div class="memory-card">
+                    <span class="memory-icon">😢</span>
+                    <div class="memory-title">每天的等待</div>
+                    <div class="memory-text">小糯米每天都會坐在門口等待，眼神中充滿期待和不解。牠不明白為什麼主人還不回來，只是默默地守候著，相信主人一定會回來的。</div>
+                    <div class="memory-emotion">深深的思念</div>
+                </div>
+                
+                <div class="memory-card">
+                    <span class="memory-icon">🛏️</span>
+                    <div class="memory-title">主人的床</div>
+                    <div class="memory-text">小糯米總是蜷縮在主人的床上，聞著那熟悉的味道。即使主人不在，牠也要守護著這個充滿回憶的地方，彷彿主人隨時會回來一樣。</div>
+                    <div class="memory-emotion">溫暖的懷念</div>
+                </div>
+                
+                <div class="memory-card">
+                    <span class="memory-icon">🍽️</span>
+                    <div class="memory-title">孤單的用餐</div>
+                    <div class="memory-text">以前吃飯時，主人總是在旁邊陪伴。現在小糯米吃得很慢，時不時會抬頭看看主人平常坐的地方，希望能看到那個熟悉的身影。</div>
+                    <div class="memory-emotion">孤獨的用餐時光</div>
+                </div>
+                
+                <div class="memory-card">
+                    <span class="memory-icon">🎾</span>
+                    <div class="memory-title">無人陪玩</div>
+                    <div class="memory-text">那個粉色的小球靜靜地躺在角落，小糯米偶爾會叼起它，但很快就放下了。沒有主人的陪伴，再喜歡的玩具也失去了樂趣。</div>
+                    <div class="memory-emotion">失落的遊戲時光</div>
+                </div>
+                
+                <div class="memory-card">
+                    <span class="memory-icon">🌙</span>
+                    <div class="memory-title">漫長的夜晚</div>
+                    <div class="memory-text">夜深人靜時，小糯米會輕聲地叫喚，彷彿在呼喚主人回來。牠會在房間裡走來走去，尋找主人的蹤跡，然後疲憊地躺下，在夢中與主人相聚。</div>
+                    <div class="memory-emotion">寂寞的夜晚</div>
+                </div>
+                
+                <div class="memory-card">
+                    <span class="memory-icon">📱</span>
+                    <div class="memory-title">熟悉的聲音</div>
+                    <div class="memory-text">每當聽到手機鈴聲或熟悉
